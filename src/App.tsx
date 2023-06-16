@@ -7,7 +7,9 @@ import ReactFlow, {
   getOutgoers,
   getConnectedEdges,
   ControlButton,
+  MiniMap,
   addEdge,
+  Background,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
@@ -104,7 +106,7 @@ const App = () => {
     <div
       className="wrapper"
       ref={reactFlowWrapper}
-      style={{ width: "100vw", height: "100vh" }}
+      style={{ width: "90vw", height: "90vh" }}
     >
       <ReactFlow
         nodes={nodes}
@@ -131,6 +133,8 @@ const App = () => {
             <div>delete all nodes</div>
           </ControlButton>
         </Controls>
+        <MiniMap />
+        <Background variant="dots"  size={1} lineWidth={1} color={'#ffff'}/>
       </ReactFlow>
     </div>
   );

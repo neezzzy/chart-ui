@@ -24,11 +24,17 @@
 
 .button {
   background-color: #c5c2c2;
+  border-radius: 20px;
   color: #000000;
   border: none;
-  padding: 40px;
+  padding: 15px 30px;
   margin: 10px 0;
   text-transform: capitalize;
   border: 1px solid #333333;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  width: 50px;
+  height: 50px;
 }

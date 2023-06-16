@@ -7,25 +7,29 @@ import ReactFlow, {
   getOutgoers,
   getConnectedEdges,
   ControlButton,
+  addEdge,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
 import "./App.css";
 
 const initialNodes = [
-  {
-    id: "0",
-    type: "input",
-    data: { label: "Node" },
-    position: { x: 0, y: 50 },
-  },
+  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
+  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
 ];
+
+
 
 const App = () => {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [prevNodePosition, setPrevNodePosition] = useState({ x: 0, y: 50 });
+
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
+  );
 
   const generateUniqueId = () => {
     const timestamp = Date.now();
@@ -100,7 +104,7 @@ const App = () => {
     <div
       className="wrapper"
       ref={reactFlowWrapper}
-      style={{ width: "100%", height: "100vh" }}
+      style={{ width: "100vw", height: "100vh" }}
     >
       <ReactFlow
         nodes={nodes}
@@ -108,6 +112,7 @@ const App = () => {
         onNodesChange={onNodesChange}
         onNodesDelete={onNodesDelete}
         onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
         fitView
       >
         <Controls showZoom={false} showFitView={false} showInteractive={false}>

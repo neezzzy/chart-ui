@@ -1,7 +1,7 @@
 /* main UI */
 .react-flow .react-flow__handle {
   border-radius: 10px;
-  background-color: #784be8;
+  background-color: #cacacc;
 }
 
 .react-flow .react-flow__node {
@@ -17,7 +17,7 @@
 .wrapper {
   flex-grow: 1;
   height: 100%;
-  background-color: #d9c9ffbb;
+  background-color: #7046d3bb;
 }
 
 /* controls */

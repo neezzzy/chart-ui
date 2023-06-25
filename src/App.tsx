@@ -9,24 +9,51 @@ import ReactFlow, {
   ControlButton,
   MiniMap,
   addEdge,
+  Panel,
   Background,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
 import "./App.css";
+import TooltipNode from "./components/TooltipNode";
+import CustomNode from "./components/CustomNode";
 
-const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-];
+const nodeTypes = {
+  custom: CustomNode,
+  tooltip: TooltipNode,
+};
 
+const defaultNodeStyle = {
+  border: "3px solid #ff0071",
+  background: "white",
+  borderRadius: 20,
+};
 
+const handleDeleteNode = () => {
+  console.log("delete node");
+};
 
 const App = () => {
   const reactFlowWrapper = useRef(null);
+  const initialNodes = [
+    {
+      id: "1",
+      type: "custom",
+      style: defaultNodeStyle,
+      position: { x: 0, y: 0 },
+      data: { label: "1", onDelete: handleDeleteNode },
+    },
+    {
+      id: "2",
+      type: "custom",
+      style: defaultNodeStyle,
+      position: { x: 0, y: 100 },
+      data: { label: "2" },
+    },
+  ];
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [prevNodePosition, setPrevNodePosition] = useState({ x: 0, y: 50 });
+  const [prevNodePosition, setPrevNodePosition] = useState({ x: 0, y: 0 });
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -40,7 +67,7 @@ const App = () => {
 
   const handleAddNode = useCallback(() => {
     if (prevNodePosition === null) {
-      setPrevNodePosition({ x: 0, y: 50 });
+      setPrevNodePosition({ x: 0, y: 0 });
     } else {
       const { x, y } = prevNodePosition;
       const id = generateUniqueId();
@@ -48,7 +75,9 @@ const App = () => {
       const newNode = {
         id,
         position: { x, y: y + 50 },
+        type: "custom",
         data: { label: `Node ${id}` },
+        style: defaultNodeStyle,
       };
 
       setPrevNodePosition({ x, y: y + 50 });
@@ -106,11 +135,12 @@ const App = () => {
     <div
       className="wrapper"
       ref={reactFlowWrapper}
-      style={{ width: "90vw", height: "90vh" }}
+      style={{ width: "100%", height: "100vh"}}
     >
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onNodesDelete={onNodesDelete}
         onEdgesChange={onEdgesChange}
@@ -123,7 +153,7 @@ const App = () => {
             onClick={handleAddNode}
             title="action"
           >
-            <div>press "N" or add node</div>
+            <div>press "N" to add node</div>
           </ControlButton>
           <ControlButton
             className="button"
@@ -134,7 +164,7 @@ const App = () => {
           </ControlButton>
         </Controls>
         <MiniMap />
-        <Background variant="dots"  size={1} lineWidth={1} color={'#ffff'}/>
+        <Background variant="dots" size={1} lineWidth={1} color={"#ffff"} />
       </ReactFlow>
     </div>
   );

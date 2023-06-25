@@ -1,56 +1,45 @@
-import { memo, useCallback } from "react";
-import { Handle, Position, NodeToolbar, NodeResizer } from "reactflow";
+import React from "react";
+import { Handle, NodeProps, Position, NodeResizer } from "reactflow";
 
-const CustomNode = ({ data, selected }) => {
-  const handleStyle = { backgroundColor: "#242624", borderRadius: 10 };
+import useStore, { NodeData } from "../store";
+
+function CustomNode({ id, data, selected }: NodeProps<NodeData>) {
+  const updateNodeText = useStore((state) => state.updateNodeText);
+
   const inputContainerStyle = {
     minHeight: 20,
-    width: '100%',
-    margin: 10,
-    border: 'none', 
+    width: "100%",
+    border: "none",
+    fontSize: 10,
+    textAlign: "center",
+    outline: "none",
+    color: "#fff",
+    backgroundColor: "#242624",
+
   };
-
-  function TextUpdaterNode({ data }) {
-    const onChange = useCallback((evt) => {
-      console.log(evt.target.value);
-    }, []);
-    return (
-      <>
-        <NodeToolbar
-          isVisible={data.toolbarVisible}
-          position={data.toolbarPosition}
-        >
-          <button onClick={data.onDelete}>delete</button>
-          <button>copy</button>
-        </NodeToolbar>
-
+  return (
+    <div>
+      <Handle type="target" position={Position.Top}  />
+      <Handle type="source" position={Position.Bottom}  />
+      <div >
         <input
           style={inputContainerStyle}
-          id="text"
-          name="text"
-          onChange={onChange}
+          type="text"
+          placeholder="Enter text"
+          defaultValue={data.text}
+          onChange={(evt) => updateNodeText(id, evt.target.value)}
           className="nodrag"
         />
-
-        <NodeResizer
-          color="#000000"
-          isVisible={selected}
-          minWidth={100}
-          minHeight={30}
-        />
-        <Handle type="target" position={Position.Top} style={handleStyle} />
-        <Handle type="source" position={Position.Bottom} style={handleStyle} />
-      </>
-    );
-  }
-
-  return (
-    <TextUpdaterNode
-      data={data}
-      selected={selected}
-      handleStyle={handleStyle}
-    />
+      </div>
+      <NodeResizer
+        color="#000000"
+        isVisible={selected}
+        minWidth={150}
+        minHeight={30}
+      />
+      <Handle type="source" position={Position.Bottom} />
+    </div>
   );
-};
+}
 
-export default memo(CustomNode);
+export default CustomNode;

@@ -10,7 +10,7 @@ allows you to generate graphs and charts using the power of OpenAI's Language Mo
     [ ] user can select number of nodes to respond with
     [ ] it can respond with multiple levels of hierarchy
     [ ] user can edit nodes
-    [ ] user can drag nodes and set position manually
+    [x] user can drag nodes and set position manually
     [ ] user can save manually set layout
     [ ] arrange by algorithm
     [ ] when you zoom out, text is summarized (show 1 - 4 words)

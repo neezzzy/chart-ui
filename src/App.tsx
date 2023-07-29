@@ -36,7 +36,7 @@ const selector = (state) => ({
 
 const App = () => {
   const defaultNodeStyle = {
-    border: "3px solid #ff0071",
+    border: "1px solid #ff0071",
     background: "white",
     borderRadius: 20,
   };
@@ -125,7 +125,7 @@ const App = () => {
           </ControlButton>
         </Controls>
         <MiniMap />
-        <Background size={0.9} lineWidth={1} color={"#ffff"} />
+        <Background size={1} lineWidth={0.5} />
       </ReactFlow>
     </div>
   );

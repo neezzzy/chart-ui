@@ -18,6 +18,7 @@ import TooltipNode from "./components/TooltipNode";
 import CustomNode from "./components/CustomNode";
 import useStore from "./store";
 import { shallow } from "zustand/shallow";
+import QueryComponent from "./components/QueryComponent";
 
 const nodeTypes = {
   custom: CustomNode,
@@ -82,12 +83,15 @@ const App = () => {
     };
   }, [handleAddNode]);
 
+
+
   return (
     <div
       className="wrapper"
       ref={reactFlowWrapper}
       style={{ width: "100%", height: "100vh" }}
     >
+      <QueryComponent />
       <ReactFlow
         nodes={nodes}
         edges={edges}

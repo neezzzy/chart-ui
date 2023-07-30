@@ -1,33 +1,37 @@
 /* QueryComponent.css */
 
 .query-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px;
-  }
-  
-  .query-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    width: 300px;
-  }
-  
-  .query-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Hover effect for the button */
-  .query-button:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: transparent;
+}
+
+.query-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 300px;
+}
+
+.query-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for the button */
+.query-button:hover {
+  background-color: #0056b3;
+}

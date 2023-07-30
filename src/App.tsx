@@ -57,7 +57,7 @@ const App = () => {
     addNode,
   } = useStore(selector, shallow);
 
-  const handleAddNode = useCallback(() => {
+  const handleAddNode = useCallback((text: string) => {
     addNode({
       id: generateUniqueId(),
       position: {
@@ -65,15 +65,19 @@ const App = () => {
         y: Math.floor(Math.random() * 150),
       },
       type: "custom",
-      data: { text: `` },
+      data: { text: text },
       style: defaultNodeStyle,
     });
   }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      if (event.target.tagName === "INPUT") {
+        // when entering in QueryComponent or adding Node text
+        return;
+      }
       if (event.key === "n" || event.key === "N") {
-        handleAddNode();
+        handleAddNode("");
       }
     };
 
@@ -83,15 +87,13 @@ const App = () => {
     };
   }, [handleAddNode]);
 
-
-
   return (
     <div
       className="wrapper"
       ref={reactFlowWrapper}
       style={{ width: "100%", height: "100vh" }}
     >
-      <QueryComponent />
+      <QueryComponent addNode={handleAddNode} />
       <ReactFlow
         nodes={nodes}
         edges={edges}

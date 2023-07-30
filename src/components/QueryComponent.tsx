@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import './QueryComponent.css'; // Import the CSS file for styling
+import React, { useState } from "react";
+import "./QueryComponent.css"; // Import the CSS file for styling
+import OpenAiChain from "../util/OpenAiChain";
 
-const QueryComponent = () => {
-  const [query, setQuery] = useState('');
+const QueryComponent = ({ addNode }) => {
+  const [query, setQuery] = useState("");
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
 
-  const handleSubmit = () => {
-    console.log('Query submitted:', query);
-    setQuery('');
+  const handleSubmit = async () => {
+    console.log("Query submitted:", query);
+    const result = await OpenAiChain(query);
+    console.log("Response from OpenAiChain:", result);
+    addNode(result);
+    setQuery("");
   };
 
   return (

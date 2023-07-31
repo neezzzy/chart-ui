@@ -157,26 +157,6 @@ const App = () => {
         <MiniMap />
         <Background size={1} lineWidth={0.5} />
       </ReactFlow>
-
-      {/* <div className="updatenode__controls">
-        <label>label:</label>
-        <input
-          value={nodeName}
-          onChange={(evt) => updateNodeText(evt.target.value)}
-        />
-
-        <label className="updatenode__bglabel">background:</label>
-        <input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
-
-        <div className="updatenode__checkboxwrapper">
-          <label>hidden:</label>
-          <input
-            type="checkbox"
-            checked={nodeHidden}
-            onChange={(evt) => setNodeHidden(evt.target.checked)}
-          />
-        </div>
-      </div> */}
     </div>
   );
 };

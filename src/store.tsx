@@ -82,7 +82,6 @@ const useStore = create<RFState>((set, get) => ({
   },
   addNode: (node: Node) => {
     console.log("addNode");
-    console.log("node", node);
     set({
       nodes: [...get().nodes, node],
     });

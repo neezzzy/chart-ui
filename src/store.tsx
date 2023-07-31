@@ -62,6 +62,18 @@ const useStore = create<RFState>((set, get) => ({
       }),
     });
   },
+  updateNodeBackground: (nodeId: string, bg: string) => {
+    set({
+      nodes: get().nodes.map((node) => {
+        if (node.id === nodeId) {
+          // it's important to create a new object here, to inform React Flow about the changes
+          node.style = { ...node.style, backgroundColor: bg };
+        }
+
+        return node;
+      }),
+    });
+  },
   deleteAllNodes: () => {
     set({
       nodes: [],
@@ -69,11 +81,12 @@ const useStore = create<RFState>((set, get) => ({
     });
   },
   addNode: (node: Node) => {
-    console.log('addNode')
+    console.log("addNode");
+    console.log("node", node);
     set({
       nodes: [...get().nodes, node],
     });
-  }
+  },
 }));
 
 export default useStore;

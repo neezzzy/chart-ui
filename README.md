@@ -9,12 +9,12 @@ allows you to generate graphs and charts using the power of OpenAI's Language Mo
     [x] user can edit the prompt
     [ ] user can select number of nodes to respond with
     [ ] it can respond with multiple levels of hierarchy
-    [ ] user can edit nodes
+    [x] user can edit nodes
     [x] user can drag nodes and set position manually
     [ ] user can save manually set layout
     [ ] arrange by algorithm
     [ ] when you zoom out, text is summarized (show 1 - 4 words)
-    [ ] set color of nodes
+    [x] set color of nodes
     [ ] set color of relation arrows
     [ ] add image / icon to node
     [ ] choose LLM to use

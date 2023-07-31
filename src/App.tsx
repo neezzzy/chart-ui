@@ -1,3 +1,5 @@
+import { SketchPicker } from "react-color";
+
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactFlow, {
   useNodesState,
@@ -20,6 +22,12 @@ import useStore from "./store";
 import { shallow } from "zustand/shallow";
 import QueryComponent from "./components/QueryComponent";
 
+const defaultNodeStyle = {
+  border: "1px solid #ff0071",
+  background: "white",
+  borderRadius: 20,
+};
+
 const nodeTypes = {
   custom: CustomNode,
   tooltip: TooltipNode,
@@ -33,14 +41,12 @@ const selector = (state) => ({
   onConnect: state.onConnect,
   deleteAllNodes: state.deleteAllNodes,
   addNode: state.addNode,
+  updateNodeBackground: state.updateNodeBackground,
 });
 
 const App = () => {
-  const defaultNodeStyle = {
-    border: "1px solid #ff0071",
-    background: "white",
-    borderRadius: 20,
-  };
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [selectedNodeId, setSelectedNodeId] = useState("");
 
   const generateUniqueId = () => {
     const timestamp = Date.now();
@@ -55,6 +61,7 @@ const App = () => {
     onConnect,
     deleteAllNodes,
     addNode,
+    updateNodeBackground,
   } = useStore(selector, shallow);
 
   const handleAddNode = useCallback((text: string) => {
@@ -71,8 +78,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.target.tagName === "INPUT") {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.target as HTMLInputElement).tagName === "INPUT") {
         // when entering in QueryComponent or adding Node text
         return;
       }
@@ -93,6 +100,18 @@ const App = () => {
       ref={reactFlowWrapper}
       style={{ width: "100%", height: "100vh" }}
     >
+      {showColorPicker && (
+        <SketchPicker
+          width={200}
+          height={200}
+          color="#ff0000"
+          onChange={(color) => {
+            console.log(selectedNodeId, color.hex);
+            updateNodeBackground(selectedNodeId, color.hex);
+          }}
+          // onChangeComplete={(color, event) => console.log(color, event)}
+        />
+      )}
       <QueryComponent addNode={handleAddNode} />
       <ReactFlow
         nodes={nodes}
@@ -102,6 +121,11 @@ const App = () => {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         fitView
+        onNodeClick={(_, { id }) => {
+          setSelectedNodeId(id);
+          setShowColorPicker(true);
+        }}
+        onPaneClick={() => setShowColorPicker(false)}
       >
         <Controls showZoom={false} showFitView={false} showInteractive={false}>
           <ControlButton
@@ -133,6 +157,26 @@ const App = () => {
         <MiniMap />
         <Background size={1} lineWidth={0.5} />
       </ReactFlow>
+
+      {/* <div className="updatenode__controls">
+        <label>label:</label>
+        <input
+          value={nodeName}
+          onChange={(evt) => updateNodeText(evt.target.value)}
+        />
+
+        <label className="updatenode__bglabel">background:</label>
+        <input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
+
+        <div className="updatenode__checkboxwrapper">
+          <label>hidden:</label>
+          <input
+            type="checkbox"
+            checked={nodeHidden}
+            onChange={(evt) => setNodeHidden(evt.target.checked)}
+          />
+        </div>
+      </div> */}
     </div>
   );
 };

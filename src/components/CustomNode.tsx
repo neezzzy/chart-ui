@@ -1,6 +1,4 @@
-import React from "react";
 import { Handle, NodeProps, Position, NodeResizer } from "reactflow";
-
 import useStore, { NodeData } from "../store";
 
 function CustomNode({ id, data, selected }: NodeProps<NodeData>) {
@@ -14,14 +12,13 @@ function CustomNode({ id, data, selected }: NodeProps<NodeData>) {
     textAlign: "center",
     outline: "none",
     color: "#fff",
-    backgroundColor: "#242624",
-
+    backgroundColor: "transparent",
   };
   return (
     <div>
-      <Handle type="target" position={Position.Top}  />
-      <Handle type="source" position={Position.Bottom}  />
-      <div >
+      <Handle type="target" position={Position.Top} />
+      <Handle type="source" position={Position.Bottom} />
+      <div>
         <input
           style={inputContainerStyle}
           type="text"

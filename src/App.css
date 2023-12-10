@@ -1,10 +1,11 @@
 body {
   margin: 0;
+  background-color: #3b3b80;
 }
 /* main UI */
 .react-flow .react-flow__handle {
   border-radius: 10px;
-  background-color: #cacacc;
+  background-color: #3b3b80;
 }
 
 .react-flow .react-flow__node {

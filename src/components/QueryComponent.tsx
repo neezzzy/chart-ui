@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./QueryComponent.css"; // Import the CSS file for styling
-import OpenAiChain from "../util/OpenAiChain";
+import OllamaAiChain from "../util/OllamaAiChain";
 
 const QueryComponent = ({ addNode }) => {
   const [query, setQuery] = useState("");
@@ -11,8 +11,8 @@ const QueryComponent = ({ addNode }) => {
 
   const handleSubmit = async () => {
     console.log("Query submitted:", query);
-    const result = await OpenAiChain(query);
-    console.log("Response from OpenAiChain:", result);
+    const result = await OllamaAiChain(query);
+    console.log("Response from OllamaAiChain:", result);
     addNode(result);
     setQuery("");
   };

@@ -5,13 +5,12 @@ function CustomNode({ id, data, selected }: NodeProps<NodeData>) {
   const updateNodeText = useStore((state) => state.updateNodeText);
 
   const inputContainerStyle = {
-    minHeight: 20,
     width: "100%",
     border: "none",
     fontSize: 10,
     textAlign: "center",
     outline: "none",
-    color: "#fff",
+    color: "#20272F",
     backgroundColor: "transparent",
   };
   return (
@@ -29,7 +28,7 @@ function CustomNode({ id, data, selected }: NodeProps<NodeData>) {
         />
       </div>
       <NodeResizer
-        color="#000000"
+        color="#343333"
         isVisible={selected}
         minWidth={150}
         minHeight={30}
